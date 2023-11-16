@@ -1,9 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> signInManager;
+@using IdentityServer4.Entity
+@inject SignInManager<IdentityUser> SignInManager;
 @inject UserManager<IdentityUser> UserManager;
 
 <ul class="navbar-nav m-2">
-    @if (signInManager.IsSignedIn(User))
+    @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
             <a class="nav-link active" asp-controller="Home" asp-action="Index"> @UserManager.GetUserName(User) کاربر</a>

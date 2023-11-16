@@ -4,10 +4,9 @@ namespace IdentityServer4.Models
 {
     public class LoginViewModels
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "ایمیل را وارد کنید")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "رمز عبور را وارد کنید")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Display(Name = "مرا به خاطر بسپار.")]

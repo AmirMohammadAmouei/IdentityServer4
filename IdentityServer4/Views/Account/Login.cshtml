@@ -3,8 +3,7 @@
 <h1 class="text-secondary">Login</h1>
 
 
-<div class="text-danger" asp-validation-summary="All"></div>
-<form asp-action="Login" method="post" class="m-lg-5">
+<form asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="m-lg-5">
     <div class="form-group col-md-3 mt-5">
         <label asp-for="Email">آدرس ایمیل</label>
         <input type="text" asp-for="Email" class="form-control">
@@ -18,8 +17,8 @@
 
 
     <div class="form-check m-3">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <input type="checkbox" asp-for="RememberMe" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" asp-for="RememberMe">مرا بخاطر بسپار</label>
     </div>
-    <button type="submit" class="btn btn-primary">ثبت نام</button>
+    <button type="submit" class="btn btn-primary">ورود</button>
 </form>

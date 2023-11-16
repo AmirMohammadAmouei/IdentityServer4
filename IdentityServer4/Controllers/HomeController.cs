@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IdentityServer4.Controllers
 {
@@ -18,6 +19,7 @@ namespace IdentityServer4.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

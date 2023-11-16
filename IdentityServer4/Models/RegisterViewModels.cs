@@ -4,8 +4,8 @@ namespace IdentityServer4.Models
 {
     public class RegisterViewModels
     {
-        [Required(ErrorMessage ="نام کاربری را وارد کنید")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "نام کاربری را وارد کنید")]
+        public string? Name { get; set; }
         [Required]
         [StringLength(100, ErrorMessage = "طول رمز  عبور حداقل 6کاراکتر می باشد.", MinimumLength = 6)]
         [DataType(DataType.Password)]

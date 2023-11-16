@@ -2,6 +2,7 @@
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace IdentityServer4.Controllers
 {
@@ -37,11 +38,11 @@ namespace IdentityServer4.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                var user = new IdentityUser
                 {
                     UserName = viewModels.Name,
                     Email = viewModels.Email,
-                    Name = viewModels.Name
+                    //Name = viewModels.Name
                 };
 
                 if (viewModels.Password != viewModels.ConfirmPassword)
@@ -66,7 +67,6 @@ namespace IdentityServer4.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -75,31 +75,45 @@ namespace IdentityServer4.Controllers
 
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string? returnUrl = null)
         {
-            LoginViewModels viewodModels = new LoginViewModels();
-            return View(viewodModels);
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModels viewModels)
+        public async Task<IActionResult> Login(LoginViewModels? viewModels, string? returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
+
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(viewModels.Email, viewModels.Password,
-                    viewModels.RememberMe, lockoutOnFailure: false);
-
-                if (result.Succeeded)
+                var user = await _userManager.FindByEmailAsync(viewModels.Email);
+                if (viewModels != null)
                 {
-                    return RedirectToAction(nameof(Index), "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError(String.Empty, "ورود با خطا مواجه شد،مجدد تلاش کنید.");
-                    return View();
 
+                    var result = await _signInManager.CheckPasswordSignInAsync(user, viewModels.Password,
+                        lockoutOnFailure: true);
+
+                    if (result.Succeeded)
+                    {
+                        //return Redirect(returnUrl);
+                        return Redirect(returnUrl);
+                    }
+
+                    if (result.IsLockedOut)
+                    {
+                        return View("LockOut");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(String.Empty, "ورود با خطا مواجه شد،مجدد تلاش کنید.");
+                        return View();
+
+                    }
                 }
             }
             return View(viewModels);
