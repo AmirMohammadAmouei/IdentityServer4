@@ -40,7 +40,7 @@ namespace IdentityServer4.Controllers
             {
                 var user = new IdentityUser
                 {
-                    UserName = viewModels.Name,
+                    UserName = viewModels.Email,
                     Email = viewModels.Email,
                     //Name = viewModels.Name
                 };
@@ -91,11 +91,10 @@ namespace IdentityServer4.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(viewModels.Email);
                 if (viewModels != null)
                 {
 
-                    var result = await _signInManager.CheckPasswordSignInAsync(user, viewModels.Password,
+                    var result = await _signInManager.PasswordSignInAsync(viewModels.Email, viewModels.Password, viewModels.RememberMe,
                         lockoutOnFailure: true);
 
                     if (result.Succeeded)
@@ -119,5 +118,25 @@ namespace IdentityServer4.Controllers
             return View(viewModels);
         }
 
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel viewModels)
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
     }
 }

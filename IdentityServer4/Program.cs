@@ -15,7 +15,7 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Password.RequireUppercase = false;
     opt.Password.RequireDigit = true;
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
-    opt.Lockout.MaxFailedAccessAttempts = 1;
+    opt.Lockout.MaxFailedAccessAttempts = 3;
 });
 
 var app = builder.Build();

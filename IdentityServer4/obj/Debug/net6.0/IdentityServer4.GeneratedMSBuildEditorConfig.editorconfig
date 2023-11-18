@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = F:\IdentityServer4-SampleProject\IdentityServer4\IdentityServer4
 build_property._RazorSourceGeneratorDebug = 
 
+[F:/IdentityServer4-SampleProject/IdentityServer4/IdentityServer4/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/IdentityServer4-SampleProject/IdentityServer4/IdentityServer4/Views/Account/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/IdentityServer4-SampleProject/IdentityServer4/IdentityServer4/Views/Account/LockOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2NrT3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
